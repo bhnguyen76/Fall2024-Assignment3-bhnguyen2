@@ -54,7 +54,7 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Age,IMBD,Photo")] Actor actor)
+        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Age,IMDb,Photo")] Actor actor)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Age,IMBD,Photo")] Actor actor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Age,IMDb,Photo")] Actor actor)
         {
             if (id != actor.Id)
             {
