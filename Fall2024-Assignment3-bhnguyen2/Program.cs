@@ -1,4 +1,5 @@
 using Fall2024_Assignment3_bhnguyen2.Data;
+using Fall2024_Assignment3_bhnguyen2.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<OpenAIService>(provider =>
+    new OpenAIService(
+        openAiApiKey,
+        "https://fall2024-bhnguyen2-openai.openai.azure.com/"));
+builder.Services.AddScoped<SentimentService>();
 
 var app = builder.Build();
 
