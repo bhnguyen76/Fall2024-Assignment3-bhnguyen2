@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Fall2024_Assignment3_bhnguyen2.Data;
 using Fall2024_Assignment3_bhnguyen2.Models;
+using Fall2024_Assignment3_bhnguyen2.Data.Migrations;
+using Fall2024_Assignment3_bhnguyen2.Services;
 
 namespace Fall2024_Assignment3_bhnguyen2.Controllers
 {
     public class ActorsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public ActorsController(ApplicationDbContext context)
+        private readonly OpenAIService openAIService;
+        private readonly SentimentService sentimentService;
+        public ActorsController(ApplicationDbContext context, OpenAIService openAIServiceParam, SentimentService sentimentServiceParam)
         {
             _context = context;
+            openAIService = openAIServiceParam;
+            sentimentService = sentimentServiceParam;
         }
 
         // GET: Actors
@@ -40,7 +45,22 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
                 return NotFound();
             }
 
-            return View(actor);
+            var movies = await openAIService.GenerateMovieListAsync(actor.Name);
+            var tweets = await openAIService.GenerateTweetsAsync(actor.Name);
+
+            var sentiments = sentimentService.AnalyzeSentimentsTweets(tweets);
+
+            double sentimentAverage = sentiments.Values.Sum(r => r.Sentiment) / sentiments.Count;
+
+            var model = new ActorDetailsViewModel
+            {
+                Actor = actor,
+                Movies = movies,
+                Tweets = sentiments.Values.ToList(),
+                SentimentAverage = Math.Round(sentimentAverage, 4)
+            };
+
+            return View(model);
         }
 
         // GET: Actors/Create
