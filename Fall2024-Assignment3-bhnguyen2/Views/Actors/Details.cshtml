@@ -62,12 +62,21 @@
 </div>
 
 <h3>Movies</h3>
-<ul>
-    @foreach (var movie in Model.Movies)
-    {
-        <li>@movie</li>
-    }
-</ul>
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+				<td>@movie</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <h3>Tweets</h3>
 <h6>Sentiment Average is @Model.SentimentAverage</h6>

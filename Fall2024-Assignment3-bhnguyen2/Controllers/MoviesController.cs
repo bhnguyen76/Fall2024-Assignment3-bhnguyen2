@@ -133,7 +133,7 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
                         using (var memoryStream = new MemoryStream())
                         {
                             await Photo.CopyToAsync(memoryStream);
-                            movie.Photo = memoryStream.ToArray();  // Convert the uploaded image to a byte array
+                            movie.Photo = memoryStream.ToArray();  
                         }
                     }
                     else
