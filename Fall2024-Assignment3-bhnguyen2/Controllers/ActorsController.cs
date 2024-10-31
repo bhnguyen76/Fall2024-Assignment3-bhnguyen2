@@ -74,10 +74,19 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Age,IMDb,Photo")] Actor actor)
+        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Age,IMDb")] Actor actor, IFormFile Photo)
         {
             if (ModelState.IsValid)
             {
+                if (Photo != null && Photo.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await Photo.CopyToAsync(memoryStream);
+                        actor.Photo = memoryStream.ToArray();
+                    }
+                }
+
                 _context.Add(actor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -106,7 +115,7 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Age,IMDb,Photo")] Actor actor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Age,IMDb")] Actor actor, IFormFile Photo)
         {
             if (id != actor.Id)
             {
@@ -117,6 +126,21 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
             {
                 try
                 {
+                    if (Photo != null && Photo.Length > 0)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await Photo.CopyToAsync(memoryStream);
+                            actor.Photo = memoryStream.ToArray();  // Convert the uploaded image to a byte array
+                        }
+                    }
+                    else
+                    {
+                        // If no new photo is uploaded, keep the existing photo
+                        var existingMovie = await _context.Actor.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+                        actor.Photo = existingMovie?.Photo;
+                    }
+
                     _context.Update(actor);
                     await _context.SaveChangesAsync();
                 }
