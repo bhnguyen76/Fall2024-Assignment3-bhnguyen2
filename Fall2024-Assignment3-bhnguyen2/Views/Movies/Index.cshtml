@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                    @if (!string.IsNullOrWhiteSpace(item.IMDb))
+                @if (!string.IsNullOrWhiteSpace(item.IMDb))
                 {
-                        <a href="@item.IMDb" target="_blank">View on IMDb</a>
+                    <a href="@item.IMDb" target="_blank">View on IMDb</a>
                 } 
             </td>
             <td>
