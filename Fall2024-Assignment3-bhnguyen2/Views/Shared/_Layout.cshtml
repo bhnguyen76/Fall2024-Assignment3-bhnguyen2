@@ -6,7 +6,9 @@
     <title>@ViewData["Title"] - Fall2024_Assignment3_bhnguyen2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Fall2024_Assignment3_bhnguyen2.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" integrity="sha384-kTpRxBMGYOdLoIezY37vtaSSbfP52qH5x9UZDA+3xuZmpr3HZYo0tviaiwzFOBTm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" integrity="sha384-JMAAyYCa30ppXdV7yVd0xvCueC8MkzDGdJhVfdB5a0cLZB632nCcG+t8jtFM/3rf" crossorigin="anonymous">
 </head>
 <body>
     <header>
@@ -54,6 +56,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js" integrity="sha384-6iuZsF8AtyiLIsge/8guRFvuMwMKv/rkzIvOfVUumBZ7HJl+vSvxWxj3w0VuZLcs" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js" integrity="sha384-bX64nQ/u/Jovgh0rdhdtHy2BMWv9TOOds6b4reiVcJ0KcA76JdIxmwar1pN2NsUj" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

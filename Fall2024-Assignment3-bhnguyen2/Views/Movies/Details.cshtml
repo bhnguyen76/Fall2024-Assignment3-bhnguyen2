@@ -57,8 +57,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Movie.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Movie.Id" class="rounded-square-button">Edit</a> |
+    <a asp-action="Index" class="rounded-square-button">Back to List</a>
 </div>
 
 <h3>Actors</h3>
@@ -71,7 +71,7 @@
 
 <h3>Reviews</h3>
 <h6>Sentiment Average is @Model.SentimentAverage</h6>
-<table class="table">
+<table class="table datatable">
     <thead>
         <tr>
             <th>Review</th>
