@@ -76,7 +76,7 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,IMDb,Genre,Year")] Movie movie, IFormFile Photo)
+        public async Task<IActionResult> Create([Bind("Id,Title,IMDb,Genre,Year")] Movie movie, IFormFile? Photo)
         {
             if (ModelState.IsValid)
             {
@@ -117,7 +117,7 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IMDb,Genre,Year")] Movie movie, IFormFile Photo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IMDb,Genre,Year")] Movie movie, IFormFile? Photo)
         {
             if (id != movie.Id)
             {
