@@ -61,12 +61,15 @@ namespace Fall2024_Assignment3_bhnguyen2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ActorId,MovieId")] MovieActor movieActor)
         {
-            if (ModelState.IsValid)
+            bool alreadyExists = await _context.MovieActor.AnyAsync(cs => cs.MovieId == movieActor.MovieId && cs.ActorId == movieActor.ActorId);
+
+            if (ModelState.IsValid && !alreadyExists)
             {
                 _context.Add(movieActor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ModelState.AddModelError("", "The Movie-Actor relationship already exists");
             ViewData["ActorId"] = new SelectList(_context.Actor, "Id", "Name", movieActor.ActorId);
             ViewData["MovieId"] = new SelectList(_context.Movie, "Id", "Title", movieActor.MovieId);
             return View(movieActor);
